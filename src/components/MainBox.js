@@ -1,10 +1,55 @@
+import React, { useState } from "react";
+import Highlightable from "./Highlight";
+
 const MainBox = () => {
+    const text = `
+        Presidio Bank (OTCBB: PDOB), sdasa Bay Area business bank, today reported
+        unaudited results for the first quarter ended March 31, 2019 with Net
+        Income of $3.1 million, down from $3.3 million in the fourth quarter of
+        2018 and up from $2.2 million (38%) in the first quarter of 2018.Presidio
+        Bank (OTCBB: PDOB), a Bay Area business bank, today reported unaudited
+        results for the first quarter ended March 31, 2019 with Net Income of $3.1
+        million, down from $3.3 million in the fourth quarter of 2018 and up from
+        $2.2 million (38%) in the first quarter of 2018.
+    `;
+
+    // to dynamically update the highligted substring
+    const [ranges, setRanges] = useState([
+        {
+        id: 0,
+        offset: 10,
+        length: 29
+        }
+    ]);
+
+    // add highlight to ranges
+    const handleHightlight = range => {
+        setRanges([...ranges, range]);
+      };
+
+    // delete the highlight by filtering it out from the ranges
+    const deleteMark = range => {
+    setRanges(ranges.filter(r => r.id !== range));
+    // console.log(ranges.filter(r => r.id !== range));
+    };
+
     return (
         <div id='mainBox' className="middleItem">
-            <p>Bacon ipsum dolor amet biltong boudin flank filet mignon, ribeye bresaola corned beef meatloaf fatback. Salami bresaola pork burgdoggen. Chicken tenderloin turducken brisket. Alcatra tri-tip pork pork chop chicken short loin. Jerky t-bone ball tip, corned beef shankle frankfurter doner short loin bresaola landjaeger tongue drumstick shank.</p>
-            <p>Bresaola swine rump shankle sausage. Beef ribs landjaeger ball tip, turducken chuck venison tongue bacon jowl shoulder spare ribs chicken frankfurter andouille picanha. Chicken beef ribs cupim tongue strip steak. Pork chop kevin bacon jerky spare ribs. Doner boudin shoulder fatback. Kevin fatback kielbasa t-bone, pork bresaola hamburger ribeye buffalo meatloaf pork belly chislic picanha jerky.</p>
+            <Highlightable
+                ranges={ranges}
+                handleHighlight={handleHightlight}
+                deleteMark={deleteMark}
+                text={text}
+            />
         </div>
     )
 }
 
 export default MainBox
+
+/* 
+1- Move sidebar buttons to Mainbox.js
+2- Create ranges arrays and their useState(s)
+3- Add if else logic inside ranges attribute to ranges attribute
+4- Keep an array for all kinds of ranges and individual ones (to be able to show all kinds of higlighted tags)
+*/
