@@ -9,19 +9,19 @@ function textNodesUnder(node) {
   return all;
 }
 
-const Mark = ({ id, children, removeRange }) => {
+const Mark = ({ id, children, removeRange, colorClass }) => {
   const handleClick = event => {
     event.stopPropagation();
     removeRange(id);
   };
   return (
-    <mark className="my-mark" onClick={handleClick}>
+    <mark className={colorClass} onClick={handleClick}>
       {children}
     </mark>
   );
 };
 
-const Highlightable = ({ ranges, text, handleHighlight, deleteMark }) => {
+const Highlightable = ({ ranges, text, handleHighlight, deleteMark, colorClass }) => {
   const onMouseUp = event => {
     if (event.target !== myRef.current) return;
     event.stopPropagation();
@@ -94,7 +94,7 @@ const Highlightable = ({ ranges, text, handleHighlight, deleteMark }) => {
       const range = ranges[i];
       const nextRange = ranges[i + 1];
       out.push(
-        <Mark key={range.id} id={range.id} removeRange={removeRange}>
+        <Mark key={range.id} id={range.id} removeRange={removeRange} colorClass={colorClass}>
           {text.slice(range.offset, range.offset + range.length + 1)}
         </Mark>
       );

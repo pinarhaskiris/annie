@@ -28,7 +28,7 @@ button {
 
 #functions {
   text-align: center;
-  margin-top: 15vh;
+  margin-top: 1vh;
 }
 
 .middleItem {
@@ -42,24 +42,36 @@ button {
 #main {
  display: flex;
  flex-direction: row;
- margin: 0px 20px;
+ margin: 20px;
 }
 
 .mainItem {
-  margin: 20px;
+  margin: 10px 20px;
 }
 
 #sidebar {
   background-color: beige;
   min-width: 200px;
-
   border: 1px solid rgb(48, 48, 48);
+  margin-right: 20px;
 }
 
 #topbar {
   height: 100px;
   background-color: pink;
   margin-bottom: 30px;
+}
+
+.pink {
+  background-color: pink;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
 }
 
 
