@@ -21,7 +21,7 @@ const Mark = ({ id, children, removeRange, colorClass }) => {
   );
 };
 
-const Highlightable = ({ ranges, text, handleHighlight, deleteMark, colorClass }) => {
+const Highlightable = ({ ranges, text, handleHighlight, deleteMark, colorClass}) => {
   const onMouseUp = event => {
     if (event.target !== myRef.current) return;
     event.stopPropagation();
@@ -70,12 +70,15 @@ const Highlightable = ({ ranges, text, handleHighlight, deleteMark, colorClass }
     const startIndex = lenPrev + range.startOffset;
     const endIndex = lenPrev + range.endOffset;
 
+
+
     handleHighlight({
       id: Math.random()
         .toString(16)
         .slice(2),
       offset: startIndex,
-      length: endIndex - startIndex
+      length: endIndex - startIndex,
+      colorClass: colorClass
     });
   };
 
@@ -94,7 +97,7 @@ const Highlightable = ({ ranges, text, handleHighlight, deleteMark, colorClass }
       const range = ranges[i];
       const nextRange = ranges[i + 1];
       out.push(
-        <Mark key={range.id} id={range.id} removeRange={removeRange} colorClass={colorClass}>
+        <Mark key={range.id} id={range.id} removeRange={removeRange} colorClass={range.colorClass}>
           {text.slice(range.offset, range.offset + range.length + 1)}
         </Mark>
       );
@@ -103,7 +106,7 @@ const Highlightable = ({ ranges, text, handleHighlight, deleteMark, colorClass }
 
     const lastRange = ranges[ranges.length - 1];
     out.push(
-      <Mark key={lastRange.id} id={lastRange.id} removeRange={removeRange}>
+      <Mark key={lastRange.id} id={lastRange.id} removeRange={removeRange} colorClass={lastRange.colorClass}>
         {text.slice(lastRange.offset, lastRange.offset + lastRange.length + 1)}
       </Mark>
     );

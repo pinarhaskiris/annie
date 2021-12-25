@@ -10,68 +10,116 @@ h1 {
   margin-left: 40px;
   margin-bottom: 0px;
   padding-top: 20px;
+  color: #b0b0b0;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: #242424;
 }
 
 button {
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 5px 10px;
+  border-radius: 25px;
   border: none;
-  margin: 20px;
-  background-color: purple;
-  color: white;
+  margin: 5px;
+  color: #242424;
   font-weight: 800;
 }
 
-#functions {
+input {
+  max-width: 200px;
+}
+
+p {
+  color: white;
+  font-weight: 600;
   text-align: center;
-  margin-top: 1vh;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+span {
+  margin: 5px;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 25px;
+}
+
+#personBtn {
+  border: 2px solid #c453f5;
+  color: #c453f5;
+  background: transparent;
+  transition: 0.3s;
+}
+
+#personBtn:hover, .personTag {
+  background-color: #c453f5;
+  color: #242424;
+}
+
+.personTag:hover, .locTag:hover, .orgTag:hover {
+  opacity: 0.7;
+}
+
+#orgBtn {
+  border: 2px solid #63dbb9;
+  background: transparent;
+  color: #63dbb9;
+  transition: 0.3s;
+}
+
+#orgBtn:hover, .orgTag {
+  background-color: #63dbb9;
+  color: #242424;
+}
+
+#locBtn {
+  border: 2px solid #e8982e;
+  background: transparent;
+  color: #e8982e;
+  transition: 0.3s;
+}
+
+#locBtn:hover, .locTag {
+  background-color: #e8982e;
+  color: #242424;
 }
 
 .middleItem {
   padding: 30px;
-  border: 1px solid rgb(48, 48, 48);
-  border-radius: 5px;
+  border-top: 1px solid rgb(48, 48, 48);
   overflow: scroll;
   min-height: 300px;
 }
 
 #main {
  display: flex;
- flex-direction: row;
+ flex-direction: column;
  margin: 20px;
+ color: #b0b0b0;
+ background-color: #404040;
+}
+
+#mainBox {
+  overflow-y: scroll;
+  max-height: 50vh;
+  padding: 40px;
+  text-align: justify;
 }
 
 .mainItem {
   margin: 10px 20px;
 }
 
-#sidebar {
-  background-color: beige;
-  min-width: 200px;
-  border: 1px solid rgb(48, 48, 48);
-  margin-right: 20px;
-}
-
 #topbar {
-  height: 100px;
-  background-color: pink;
-  margin-bottom: 30px;
-}
-
-.pink {
-  background-color: pink;
-}
-
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
+  max-height: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;  
 }
 
 

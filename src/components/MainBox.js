@@ -4,38 +4,16 @@ import Button from "./Button";
 
 
 const MainBox = () => {
-    
-    const [addToPerson, setAddToPerson] = useState (false)
+
+    const [addToPerson, setAddToPerson] = useState (true)
     const [addToLoc, setAddToLoc] = useState (false)
     const [addToOrg, setAddToOrg] = useState (false)
 
-    const [colorClass, setColorClass] = useState ("yellow")
+    const [colorClass, setColorClass] = useState ("personTag")
 
-    const [personRanges, setPersonRanges] = useState([
-        {
-        id: 0,
-        offset: 10,
-        length: 29
-        }
-    ]);
+    const [nowAnnotating, setNowAnnotating] = useState ("Person")
 
-    const [locRanges, setLocRanges] = useState([
-        {
-        id: 0,
-        offset: 10,
-        length: 29
-        }
-    ]);
-
-    const [orgRanges, setOrgRanges] = useState([
-        {
-        id: 0,
-        offset: 10,
-        length: 29
-        }
-    ]);
-
-    const text = `
+    const [test_text, setText] = useState (`
         Presidio Bank (OTCBB: PDOB), sdasa Bay Area business bank, today reported
         unaudited results for the first quarter ended March 31, 2019 with Net
         Income of $3.1 million, down from $3.3 million in the fourth quarter of
@@ -44,16 +22,15 @@ const MainBox = () => {
         results for the first quarter ended March 31, 2019 with Net Income of $3.1
         million, down from $3.3 million in the fourth quarter of 2018 and up from
         $2.2 million (38%) in the first quarter of 2018.
-    `;
+    `)
+
+    // dynamically update each category's range
+    const [personRanges, setPersonRanges] = useState([]);
+    const [locRanges, setLocRanges] = useState([]);
+    const [orgRanges, setOrgRanges] = useState([]);
 
     // to dynamically update the highligted substring
-    const [ranges, setRanges] = useState([
-        {
-        id: 0,
-        offset: 10,
-        length: 29
-        }
-    ]);
+    const [ranges, setRanges] = useState([]);
 
     // add highlight to ranges
     const handleHightlight = range => {
@@ -68,48 +45,63 @@ const MainBox = () => {
         else {
             setOrgRanges([...orgRanges, range]);
         }
-      };
+    };
 
     // delete the highlight by filtering it out from the ranges
     const deleteMark = range => {
     setRanges(ranges.filter(r => r.id !== range));
-    // console.log(ranges.filter(r => r.id !== range));
     };
+
+    // import and display the input txt file
+    const showFile = async (e) => {
+        e.preventDefault()
+        const reader = new FileReader()
+        reader.onload = async (e) => { 
+          const test_text = (e.target.result)
+          setText(test_text);
+          setRanges([]);
+        };
+        reader.readAsText(e.target.files[0])
+      }
+      
 
     return (
         <div id='main' className="mainItem">
-            <div id='sidebar'>
-                <div id='functions'>
-                    <Button text='Import' className='actionBtn' />
+            <p>Now annotating: <span className={colorClass}>{nowAnnotating}</span></p>
+            <div id='topbar'>
+
+                <input type="file" accept=".txt" className="file-upload" onChange={(e) => showFile(e)} />
+        
+                <div id='annCategories'>
+
+                    <Button text='Person' className="annCategoryBtn" id="personBtn" onClick = {() => {
+                        setAddToPerson(true)
+                        setAddToLoc(false)
+                        setAddToOrg(false)
+                        setColorClass("personTag")
+                        setNowAnnotating("Person")
+                    }}/>
+
+                    <Button text='Location' className="annCategoryBtn" id="locBtn" onClick = {() => {
+                        setAddToPerson(false)
+                        setAddToLoc(true)
+                        setAddToOrg(false)
+                        setColorClass("locTag")
+                        setNowAnnotating("Location")
+                    }}/>
+
+                    <Button text='Organization' className="annCategoryBtn" id="orgBtn" onClick = {() => {
+                        setAddToPerson(false)
+                        setAddToLoc(false)
+                        setAddToOrg(true)
+                        setColorClass("orgTag")
+                        setNowAnnotating("Organization")
+                    }}/>
                     
-                    <div id='annCategories'>
-
-                        <Button text='Person' className='annCategoryBtn' onClick = {() => {
-                            setAddToPerson(true)
-                            setAddToLoc(false)
-                            setAddToOrg(false)
-                            setColorClass("pink");
-                        }}/>
-
-                        <Button text='Location' className='annCategoryBtn' onClick = {() => {
-                            setAddToPerson(false)
-                            setAddToLoc(true)
-                            setAddToOrg(false)
-                            setColorClass("blue");
-                        }}/>
-
-                        <Button text='Organization' className='annCategoryBtn' onClick = {() => {
-                            setAddToPerson(false)
-                            setAddToLoc(false)
-                            setAddToOrg(true)
-                            setColorClass("green");
-                        }}/>
-
-                    </div>
-
-                    <Button text='Export' className='actionBtn' />
 
                 </div>
+
+                <Button text='Export' className='actionBtn' />
                 
             </div>
             <div id='mainBox' className="middleItem">
@@ -117,7 +109,7 @@ const MainBox = () => {
                     ranges={ranges}
                     handleHighlight={handleHightlight}
                     deleteMark={deleteMark}
-                    text={text}
+                    text={test_text}
                     colorClass={colorClass}
                 />
             </div>

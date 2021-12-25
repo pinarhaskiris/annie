@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import TopBar from './components/TopBar';
 import MainBox from './components/MainBox';
 
 function App() {
@@ -10,7 +9,6 @@ function App() {
       <h1>Annie</h1>
 
       <div id='middle' className='mainItem'>
-        <TopBar />
         <MainBox />
       </div>
         
