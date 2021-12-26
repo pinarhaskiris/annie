@@ -12,7 +12,8 @@
     "react-highlight-colors": "^1.0.2",
     "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "wink-tokenizer": "^5.2.3"
   },
   "scripts": {
     "start": "react-scripts start",

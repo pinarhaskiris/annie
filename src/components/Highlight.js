@@ -70,15 +70,29 @@ const Highlightable = ({ ranges, text, handleHighlight, deleteMark, colorClass})
     const startIndex = lenPrev + range.startOffset;
     const endIndex = lenPrev + range.endOffset;
 
+    const annotatedString = text.substring(startIndex, endIndex);
 
+    const tokenizer = require('wink-tokenizer');
+    const myTokenizer = tokenizer();
+    const tokenizedText = myTokenizer.tokenize(annotatedString);
+
+    const annotatedStringBIOCombinations = []
+    annotatedStringBIOCombinations.push(`Token: "${tokenizedText[0]["value"]}"\nToken Tag: "${tokenizedText[0]["tag"]}"\nBIO Tag: B\n`);
+
+    for (let i = 1; i < tokenizedText.length; i++) {
+      annotatedStringBIOCombinations.push(`\nToken: "${tokenizedText[i]["value"]}"\nToken Tag: "${tokenizedText[i]["tag"]}"\nBIO Tag: I\n`);
+    }
 
     handleHighlight({
       id: Math.random()
         .toString(16)
         .slice(2),
       offset: startIndex,
-      length: endIndex - startIndex,
-      colorClass: colorClass
+      length: endIndex - startIndex - 1,
+      endIndex: endIndex,
+      colorClass: colorClass,
+      annotatedText: annotatedString,
+      annotatedStringBIOCombinations: annotatedStringBIOCombinations
     });
   };
 
