@@ -152,14 +152,3 @@ const MainBox = () => {
 }
 
 export default MainBox
-
-/* 
-
-1- Change highlight color according to category (SAT)
-2- Import File (SAT)
-3- BIO calculations (talk to şeniz hoca on Friday, if so, SAT)
-4- Export file (SUN)
-
-Extra: Display the category's highlights on the top bar dynamically (SUN)
-
-*/
