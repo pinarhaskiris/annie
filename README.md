@@ -1,6 +1,6 @@
 # Annie
 A simple named-entitity annotation tool (person, location, organization) made with React.js.
-##### Try it out here: [Annie](https://pinarhaskiris.github.io/annie/)
+#### Try it out here: [Annie](https://pinarhaskiris.github.io/annie/)
 
 
 ## Homepage
